@@ -1,20 +1,33 @@
-namespace ConsoleApp5
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using System.IO;
+
+namespace ConsoleApp4
 {
     internal class Program
     {
         static void Main(string[] args)
         {
+            string filepath = @"C:\Nymappe\test.txt";
+            List<string> lines = File.ReadAllLines(filepath).ToList();
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.BackgroundColor = ConsoleColor.Blue;
             Console.Clear();
-            Random rnd=new Random();
+            Random rnd = new Random();
+            
             int num = rnd.Next(0, 5);
-            string[] word = { "bandwagon","microwave","fishhook","stronghold","unknown", "vaporize" };
-            string randomword = word[1];
+            string[] word = { "bandwagon", "microwave", "fishhook", "stronghold", "unknown", "vaporize" };
+            string randomword = word[num];
+            Console.WriteLine(randomword);
             string guessedTxt = "";
             string rndlet;
+            int Amount=0;
             bool found;
-            int level =0;
+            int level = 0;
             char mychar;
             string errorLog = "\t\t\tWrong letters: ";
             string[] Hangman = { "  \t\t\t+---+\n  \t\t\t|   |\n      \t\t\t|\n      \t\t\t|\n      \t\t\t|\n      \t\t\t|\n\t\t\t=========",
@@ -24,53 +37,61 @@ namespace ConsoleApp5
                                  "  \t\t\t+---+\n  \t\t\t|   |\n  \t\t\t|   O\n\t\t\t|  /|\\  \t\t\t\n      \t\t\t|\n      \t\t\t|\n\t\t\t=========",
                                  "  \t\t\t+---+\n  \t\t\t|   |\n  \t\t\t|   O\n\t\t\t|  /|\\  \t\t\t\n\t\t\t|  /    \t\t\t\n      \t\t\t|\n\t\t\t=========",
                                  "  \t\t\t+---+\n  \t\t\t|   |\n  \t\t\t|   O\n\t\t\t|  /|\\  \t\t\t\n\t\t\t|  / \\  \t\t\t\n      \t\t\t|\n\t\t\t========="
-            } ;
+            };
 
-            
+
             for (int i = 0; i < randomword.Length; i++)
             {
                 guessedTxt += "-";
                 
+
             }
-            Console.WriteLine("\n\t\tThe word have {0} letters \n\t\t\t{1}",randomword.Length ,guessedTxt);
-            while(true)
+            
+
+            Console.WriteLine("\n\t\tThe word have {0} letters \n\t\t\t{1}", randomword.Length, guessedTxt);
+            while (true)
             {
-                
-                Console.WriteLine("{0}",Hangman[level]);
-                while(true )
+
+                Console.WriteLine("{0}", Hangman[level]);
+                while (true)
                 {
                     Console.Write("\n\t\tnow guess a random letter -> ");
 
                     rndlet = Console.ReadLine();
+                    Amount++;
                     mychar = rndlet[0];
                     rndlet = "";
                     rndlet += mychar;
                     rndlet = rndlet.ToLower();
+                    
+                    
                     if (rndlet != "")
                         break;
                 }
-                
-    
-                for (int ind=0;ind < randomword.Length; ++ind)
+
+
+                for (int ind = 0; ind < randomword.Length; ++ind)
                     if (randomword[ind] == rndlet[0])
                     {
                         guessedTxt = guessedTxt.Remove(ind, 1);
                         guessedTxt = guessedTxt.Insert(ind, rndlet);
+                        
                     }
                     else
                     {
                         guessedTxt.Insert(ind, "-");
                         
-                   
+
                     }
-                if(randomword.Contains(rndlet))
+                lines.Add($"{Amount},{rndlet},{guessedTxt}");
+                if (randomword.Contains(rndlet))
                 {
                     Console.WriteLine("\n\t\tThe word does contain {0}\n\n", rndlet);
                 }
                 else
                 {
                     Console.WriteLine("\n\t\tThe word doesnt contain {0}\n\n", rndlet);
-                    Console.Beep(800,200);
+                    Console.Beep(800, 200);
                     level++;
                     errorLog += rndlet + ",";
                 }
@@ -88,26 +109,31 @@ namespace ConsoleApp5
                         found = false;
                     }
                 }
-                if (level>=6)
+                if (level >= 6)
                 {
                     Console.WriteLine("\t\t\tGame Over \n\t\t\tYOU HAVE LOST THE GAME\n{0}", Hangman[level]);
-                    break;
+                    lines.Add("The game was lost\n");
                     
+
+                    break;
+
                 }
                 if (found == false)
                 {
                     Console.WriteLine("\t\t\tYou have won\n\t\tTHE WORD WAS {0}\n{1}", randomword, Hangman[level]);
                     Console.Beep(659, 125); Console.Beep(659, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(167); Console.Beep(523, 125); Console.Beep(659, 125); Thread.Sleep(125); Console.Beep(784, 125); Thread.Sleep(375); Console.Beep(392, 125); Thread.Sleep(375); Console.Beep(523, 125); Thread.Sleep(250); Console.Beep(392, 125); Thread.Sleep(250); Console.Beep(330, 125); Thread.Sleep(250); Console.Beep(440, 125); Thread.Sleep(125); Console.Beep(494, 125); Thread.Sleep(125); Console.Beep(466, 125); Thread.Sleep(42); Console.Beep(440, 125); Thread.Sleep(125); Console.Beep(392, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(125); Console.Beep(784, 125); Thread.Sleep(125); Console.Beep(880, 125); Thread.Sleep(125); Console.Beep(698, 125); Console.Beep(784, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(125); Console.Beep(523, 125); Thread.Sleep(125); Console.Beep(587, 125); Console.Beep(494, 125); Thread.Sleep(125); Console.Beep(523, 125); Thread.Sleep(250); Console.Beep(392, 125); Thread.Sleep(250); Console.Beep(330, 125); Thread.Sleep(250); Console.Beep(440, 125); Thread.Sleep(125); Console.Beep(494, 125); Thread.Sleep(125); Console.Beep(466, 125); Thread.Sleep(42); Console.Beep(440, 125); Thread.Sleep(125); Console.Beep(392, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(125); Console.Beep(784, 125); Thread.Sleep(125); Console.Beep(880, 125); Thread.Sleep(125); Console.Beep(698, 125); Console.Beep(784, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(125); Console.Beep(523, 125); Thread.Sleep(125); Console.Beep(587, 125); Console.Beep(494, 125); Thread.Sleep(375); Console.Beep(784, 125); Console.Beep(740, 125); Console.Beep(698, 125); Thread.Sleep(42); Console.Beep(622, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(167); Console.Beep(415, 125); Console.Beep(440, 125); Console.Beep(523, 125); Thread.Sleep(125); Console.Beep(440, 125); Console.Beep(523, 125); Console.Beep(587, 125); Thread.Sleep(250); Console.Beep(784, 125); Console.Beep(740, 125); Console.Beep(698, 125); Thread.Sleep(42); Console.Beep(622, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(167); Console.Beep(698, 125); Thread.Sleep(125); Console.Beep(698, 125); Console.Beep(698, 125); Thread.Sleep(625); Console.Beep(784, 125); Console.Beep(740, 125); Console.Beep(698, 125); Thread.Sleep(42); Console.Beep(622, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(167); Console.Beep(415, 125); Console.Beep(440, 125); Console.Beep(523, 125); Thread.Sleep(125); Console.Beep(440, 125); Console.Beep(523, 125); Console.Beep(587, 125); Thread.Sleep(250); Console.Beep(622, 125); Thread.Sleep(250); Console.Beep(587, 125); Thread.Sleep(250); Console.Beep(523, 125); Thread.Sleep(1125); Console.Beep(784, 125); Console.Beep(740, 125); Console.Beep(698, 125); Thread.Sleep(42); Console.Beep(622, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(167); Console.Beep(415, 125); Console.Beep(440, 125); Console.Beep(523, 125); Thread.Sleep(125); Console.Beep(440, 125); Console.Beep(523, 125); Console.Beep(587, 125); Thread.Sleep(250); Console.Beep(784, 125); Console.Beep(740, 125); Console.Beep(698, 125); Thread.Sleep(42); Console.Beep(622, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(167); Console.Beep(698, 125); Thread.Sleep(125); Console.Beep(698, 125); Console.Beep(698, 125); Thread.Sleep(625); Console.Beep(784, 125); Console.Beep(740, 125); Console.Beep(698, 125); Thread.Sleep(42); Console.Beep(622, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(167); Console.Beep(415, 125); Console.Beep(440, 125); Console.Beep(523, 125); Thread.Sleep(125); Console.Beep(440, 125); Console.Beep(523, 125); Console.Beep(587, 125); Thread.Sleep(250); Console.Beep(622, 125); Thread.Sleep(250); Console.Beep(587, 125); Thread.Sleep(250); Console.Beep(523, 125);
+                    lines.Add("The game was won\n");
                     break;
-                    
+
                 }
             }
+            File.WriteAllLines(filepath, lines);
             Console.WriteLine(errorLog);
 
 
 
             Console.ReadLine();
-            
+
         }
     }
 }
