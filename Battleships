@@ -1,0 +1,472 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Battleships
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.BackgroundColor = ConsoleColor.Blue;
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Clear();
+            char firkant = '\u157';
+            
+            string[,] Broad1 = new string[10, 10];
+            for (int i = 0; i <= 9; i++)
+            {
+
+                for (int j = 0; j <= 9; j++)
+                {
+                    Broad1[i, j] = "X ";
+
+
+                }
+            }
+            string[,] Broad2 = new string[10, 10];
+            for (int i = 0; i <= 9; i++)
+            {
+
+                for (int j = 0; j <= 9; j++)
+                {
+                    Broad2[i, j] = "X ";
+
+
+                }
+            }
+            Console.WriteLine("Spiller1 navn");
+            string spiller1 = Console.ReadLine();
+            Console.WriteLine("Spiller2 navn");
+            string spiller2 = Console.ReadLine();
+            Console.Clear();
+            string done = "X";
+
+            while (true)
+            {
+                Console.WriteLine($"\n{spiller1} skal placere skibe\nDER SKAL VÆRET ET AF HVER SKIB \n55555(5)\n4444(4)\n333(3)\n22(2)\n1(1)\nSe bræt(SB)\nNæste Spiller(NS)");
+                Console.WriteLine("vælg funktion");
+                string valg = Console.ReadLine();
+                if (valg == "5")
+                {
+                    Console.WriteLine("hvad skal start koordinatet være x");
+                    int start5x = int.Parse(Console.ReadLine());
+                    Console.WriteLine("hvad skal start koordinatet være y");
+                    int start5y = int.Parse(Console.ReadLine());
+                    Console.WriteLine("skal skibbet være lodret eller vandret");
+                    string retning = Console.ReadLine();
+                    retning.ToLower();
+                    Console.Clear();
+                    if (retning == "lodret")
+                    {
+                        for (int i = 0; i < 5; i++)
+                        {
+                            Broad1[start5x, start5y] = "5 ";
+                            start5x++;
+                        }
+                    }
+                    else if (retning == "vandret")
+                    {
+                        for (int i = 0; i < 5; i++)
+                        {
+                            Broad1[start5x, start5y] = "5 ";
+                            start5y++;
+                        }
+                    }
+                }
+                else if (valg == "4")
+                {
+                    Console.WriteLine("hvad skal start koordinatet være x");
+                    int start5x = int.Parse(Console.ReadLine());
+                    Console.WriteLine("hvad skal start koordinatet være y");
+                    int start5y = int.Parse(Console.ReadLine());
+                    Console.WriteLine("skal skibbet være lodret eller vandret");
+                    string retning = Console.ReadLine();
+                    retning.ToLower();
+                    Console.Clear();
+                    if (retning == "lodret")
+                    {
+                        for (int i = 0; i < 4; i++)
+                        {
+                            Broad1[start5x, start5y] = "4 ";
+                            start5x++;
+                        }
+                    }
+                    else if (retning == "vandret")
+                    {
+                        for (int i = 0; i < 4; i++)
+                        {
+                            Broad1[start5x, start5y] = "4 ";
+                            start5y++;
+                        }
+                    }
+
+                }
+                else if (valg == "3")
+                {
+                    Console.WriteLine("hvad skal start koordinatet være x");
+                    int start5x = int.Parse(Console.ReadLine());
+                    Console.WriteLine("hvad skal start koordinatet være y");
+                    int start5y = int.Parse(Console.ReadLine());
+                    Console.WriteLine("skal skibbet være lodret eller vandret");
+                    string retning = Console.ReadLine();
+                    retning.ToLower();
+                    Console.Clear();
+                    if (retning == "lodret")
+                    {
+                        for (int i = 0; i < 3; i++)
+                        {
+                            Broad1[start5x, start5y] = "3 ";
+                            start5x++;
+                        }
+                    }
+                    else if (retning == "vandret")
+                    {
+                        for (int i = 0; i < 3; i++)
+                        {
+                            Broad1[start5x, start5y] = "3 ";
+                            start5y++;
+                        }
+                    }
+                }
+                else if (valg == "2")
+                {
+                    Console.WriteLine("hvad skal start koordinatet være x");
+                    int start5x = int.Parse(Console.ReadLine());
+                    Console.WriteLine("hvad skal start koordinatet være y");
+                    int start5y = int.Parse(Console.ReadLine());
+                    Console.WriteLine("skal skibbet være lodret eller vandret");
+                    string retning = Console.ReadLine();
+                    retning.ToLower();
+                    Console.Clear();
+                    if (retning == "lodret")
+                    {
+                        for (int i = 0; i < 2; i++)
+                        {
+                            Broad1[start5x, start5y] = "2 ";
+                            start5x++;
+                        }
+                    }
+                    else if (retning == "vandret")
+                    {
+                        for (int i = 0; i < 2; i++)
+                        {
+                            Broad1[start5x, start5y] = "2 ";
+                            start5y++;
+                        }
+                    }
+                }
+                else if (valg == "1")
+                {
+                    Console.WriteLine("hvad skal start koordinatet være x");
+                    int start5x = int.Parse(Console.ReadLine());
+                    Console.WriteLine("hvad skal start koordinatet være y");
+                    int start5y = int.Parse(Console.ReadLine());
+                    Console.WriteLine("skal skibbet være lodret eller vandret");
+                    string retning = Console.ReadLine();
+                    retning.ToLower();
+                    Console.Clear();
+                    if (retning == "lodret")
+                    {
+                        for (int i = 0; i < 1; i++)
+                        {
+                            Broad1[start5x, start5y] = "1 ";
+                            start5x++;
+                        }
+                    }
+                    else if (retning == "vandret")
+                    {
+                        for (int i = 0; i < 1; i++)
+                        {
+                            Broad1[start5x, start5y] = "1 ";
+                            start5y++;
+                        }
+                    }
+                }
+                else if (valg == "ns")
+                {
+                    break;
+                }
+                else if (valg == "sb")
+                {
+                    Console.Clear ();
+                    for (int i = 0; i < 10; i++)
+                    {
+                        Console.WriteLine();
+                        for (int j = 0; j < 10; j++)
+                        {
+                            Console.Write(Broad1[i, j]);
+                        }
+                    }
+
+
+                }
+                
+            }
+            Console.Clear ();
+            while (true)
+            {
+
+                Console.WriteLine($"\n{spiller2} placere skibe \nDER SKAL VÆRET ET AF HVER SKIB\n55555(5)\n4444(4)\n333(3)\n22(2)\n1(1)\nSe bræt(SB)\nBegynd Spil(BS)");
+                Console.WriteLine("vælg funktion");
+                string valg = Console.ReadLine();
+                if (valg == "5")
+                {
+                    Console.WriteLine("hvad skal start koordinatet være x");
+                    int start5x = int.Parse(Console.ReadLine());
+                    Console.WriteLine("hvad skal start koordinatet være y");
+                    int start5y = int.Parse(Console.ReadLine());
+                    Console.WriteLine("skal skibbet være lodret eller vandret");
+                    string retning = Console.ReadLine();
+                    retning.ToLower();
+                    Console.Clear();
+                    if (retning == "lodret")
+                    {
+                        for (int i = 0; i < 5; i++)
+                        {
+                            Broad2[start5x, start5y] = "5 ";
+                            start5x++;
+                        }
+                    }
+                    else if (retning == "vandret")
+                    {
+                        for (int i = 0; i < 5; i++)
+                        {
+                            Broad2[start5x, start5y] = "5 ";
+                            start5y++;
+                        }
+                    }
+                }
+                else if (valg == "4")
+                {
+                    Console.WriteLine("hvad skal start koordinatet være x");
+                    int start5x = int.Parse(Console.ReadLine());
+                    Console.WriteLine("hvad skal start koordinatet være y");
+                    int start5y = int.Parse(Console.ReadLine());
+                    Console.WriteLine("skal skibbet være lodret eller vandret");
+                    string retning = Console.ReadLine();
+                    retning.ToLower();
+                    Console.Clear();
+                    if (retning == "lodret")
+                    {
+                        for (int i = 0; i < 4; i++)
+                        {
+                            Broad2[start5x, start5y] = "4 ";
+                            start5x++;
+                        }
+                    }
+                    else if (retning == "vandret")
+                    {
+                        for (int i = 0; i < 4; i++)
+                        {
+                            Broad2[start5x, start5y] = "4 ";
+                            start5y++;
+                        }
+                    }
+
+                }
+                else if (valg == "3")
+                {
+                    Console.WriteLine("hvad skal start koordinatet være x");
+                    int start5x = int.Parse(Console.ReadLine());
+                    Console.WriteLine("hvad skal start koordinatet være y");
+                    int start5y = int.Parse(Console.ReadLine());
+                    Console.WriteLine("skal skibbet være lodret eller vandret");
+                    string retning = Console.ReadLine();
+                    retning.ToLower();
+                    Console.Clear();
+                    if (retning == "lodret")
+                    {
+                        for (int i = 0; i < 3; i++)
+                        {
+                            Broad2[start5x, start5y] = "3 ";
+                            start5x++;
+                        }
+                    }
+                    else if (retning == "vandret")
+                    {
+                        for (int i = 0; i < 3; i++)
+                        {
+                            Broad2[start5x, start5y] = "3 ";
+                            start5y++;
+                        }
+                    }
+                }
+                else if (valg == "2")
+                {
+                    Console.WriteLine("hvad skal start koordinatet være x");
+                    int start5x = int.Parse(Console.ReadLine());
+                    Console.WriteLine("hvad skal start koordinatet være y");
+                    int start5y = int.Parse(Console.ReadLine());
+                    Console.WriteLine("skal skibbet være lodret eller vandret");
+                    string retning = Console.ReadLine();
+                    retning.ToLower();
+                    Console.Clear();
+                    if (retning == "lodret")
+                    {
+                        for (int i = 0; i < 2; i++)
+                        {
+                            Broad2[start5x, start5y] = "2 ";
+                            start5x++;
+                        }
+                    }
+                    else if (retning == "vandret")
+                    {
+                        for (int i = 0; i < 2; i++)
+                        {
+                            Broad2[start5x, start5y] = "2 ";
+                            start5y++;
+                        }
+                    }
+                }
+                else if (valg == "1")
+                {
+                    Console.WriteLine("hvad skal start koordinatet være x");
+                    int start5x = int.Parse(Console.ReadLine());
+                    Console.WriteLine("hvad skal start koordinatet være y");
+                    int start5y = int.Parse(Console.ReadLine());
+                    Console.WriteLine("skal skibbet være lodret eller vandret");
+                    string retning = Console.ReadLine();
+                    retning.ToLower();
+                    Console.Clear();
+                    if (retning == "lodret")
+                    {
+                        for (int i = 0; i < 1; i++)
+                        {
+                            Broad2[start5x, start5y] = "1 ";
+                            start5x++;
+                        }
+                    }
+                    else if (retning == "vandret")
+                    {
+                        for (int i = 0; i < 1; i++)
+                        {
+                            Broad2[start5x, start5y] = "1 ";
+                            start5y++;
+                        }
+                    }
+                }
+                else if (valg == "bs")
+                {
+                    break;
+                }
+                else if (valg == "sb")
+                {
+                    Console.Clear ();
+                    for (int i = 0; i < 10; i++)
+                    {
+                        Console.WriteLine();
+                        for (int j = 0; j < 10; j++)
+                        {
+                            Console.Write(Broad2[i, j]);
+                        }
+                    }
+
+
+                }
+            }
+            Console.Clear() ;
+            string[,] VisibleBroad1 = new string[10,10];
+            string[,] VisibleBroad2 = new string[10,10];
+            for (int i = 0; i < 10; i++)
+            {
+                Console.WriteLine();
+                for (int j = 0; j < 10; j++)
+                {
+                    VisibleBroad1[i, j] = "X ";
+                    VisibleBroad2[i, j] = "X ";
+                }
+            }
+            int spiller1vind=0 ;
+            int spiller2vind=0 ;
+            while (true) 
+            {
+                Console.WriteLine($"{spiller2} bræt");
+                for (int i = 0; i < 10; i++)
+                {
+                    Console.WriteLine();
+                    for (int j = 0; j < 10; j++)
+                    {
+                        Console.Write(VisibleBroad2[i, j]);
+                    }
+                }
+
+                Console.WriteLine($"\n{spiller1} skal gætte på et koordinat x");
+                int spiller1x = int.Parse(Console.ReadLine());
+                Console.WriteLine($"\n{spiller1} skal gætte på et koordinat y");
+                int spiller1y = int.Parse(Console.ReadLine());
+                Console.Clear();
+
+                if (Broad2[spiller1x, spiller1y] == "1"|| Broad2[spiller1x, spiller1y]=="2"||Broad2[spiller1x, spiller1y]=="3"|| Broad2[spiller1x, spiller1y]=="4"|| Broad2[spiller1x, spiller1y]=="5")
+                {
+                    Console.WriteLine($"******{spiller1} har ramt******\n");
+                    VisibleBroad2[spiller1x,spiller1y] = "# ";
+                    spiller1vind++;
+                }
+                
+                else
+                {
+                    Console.WriteLine($"******{spiller1} missede******\n");
+                    VisibleBroad2[spiller1x, spiller1y] = "O ";
+
+                }
+                if (spiller1vind == 14)
+                {
+                    break;
+                }
+                Console.WriteLine($"{spiller1} bræt");
+                for (int i = 0; i < 10; i++)
+                {
+                    Console.WriteLine();
+                    for (int j = 0; j < 10; j++)
+                    {
+                        Console.Write(VisibleBroad1[i, j]);
+                    }
+                }
+
+                Console.WriteLine($"\n{spiller2} skal gætte på et koordinat x");
+                int spiller2x = int.Parse(Console.ReadLine());
+                Console.WriteLine($"\n{spiller2} skal gætte på et koordinat y");
+                int spiller2y = int.Parse(Console.ReadLine());
+                Console.Clear();
+
+                if (Broad2[spiller2x, spiller2y] == "1" || Broad2[spiller2x, spiller2y] == "2" || Broad2[spiller2x, spiller2y] == "3" || Broad2[spiller2x, spiller2y] == "4" || Broad2[spiller2x, spiller2y] == "5")
+                {
+                    Console.WriteLine($"******{spiller2} har ramt******\n");
+                    VisibleBroad1[spiller2x, spiller2y] = "# ";
+                    spiller2vind++;
+                }
+                else
+                {
+                    Console.WriteLine($"******{spiller2} missede******\n");
+                    VisibleBroad1[spiller2x, spiller2y] = "O ";
+
+                }
+                if(spiller2vind==14)
+                {
+                    break;
+                }
+
+
+
+            }
+            if (spiller1vind == 14)
+            {
+                Console.WriteLine($"{spiller1} HAR VUNDET");
+                Console.ReadLine();
+            }
+            else if (spiller2vind == 14)
+            {
+                Console.WriteLine($"{spiller2} HAR VUNDET");
+                Console.ReadLine();
+            }
+            
+
+
+
+        }
+    }
+}
