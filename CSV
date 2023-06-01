@@ -1,0 +1,269 @@
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace CSV_System
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.BackgroundColor = ConsoleColor.Blue;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Clear();
+            for (int i = 3; i > 0; i--)
+            {
+                
+                Console.WriteLine("Login til CSV system");
+                Console.WriteLine("********************");
+                Console.WriteLine("Brugernavn");
+                string brugernavn = Console.ReadLine();
+                Console.WriteLine("Password");
+                string password = Console.ReadLine();
+                if(brugernavn =="Datait2023!"&&password=="Password") 
+                {
+                    Console.Clear();
+                    Console.WriteLine("Korrekt login information\ntryk enter for at forsætte");
+                    Console.ReadLine();
+                    break;
+
+                }
+                else
+                {
+                    Console.Clear();
+                    Console.WriteLine($"Forkert prøv igen\n{i-1} forsøg tilbage");
+                    if (i == 1)
+                    {
+                        
+                        Thread.Sleep(5000);
+                        Environment.Exit(0);
+                    }
+                }
+            }
+
+            Console.WriteLine("Vælg hvor din csv filer placeres(vis placering ikke eksistere bliver den oprettet)   \nEksempel C:\\<dinmappe>\\<dinmappe>");
+            string pathAll=Console.ReadLine();
+
+
+            if (Directory.Exists(pathAll))
+            {
+                Console.Clear();
+                Console.WriteLine("Denne mappe eksiteret allerede");
+            }
+            else
+            {
+                Directory.CreateDirectory(pathAll );
+                Console.Clear();
+                Console.WriteLine("Ny mappet oprettet");
+            }
+
+            while (true)
+            {
+                Console.WriteLine($"du befinder dig i {pathAll}");
+                Console.WriteLine("\n-Ny Person(N)");
+                Console.WriteLine("\n-Ændre Person(Æ)");
+                Console.WriteLine("\n-Slet Person(S)");
+                Console.WriteLine("\n-Slet alt(SA)");
+                Console.WriteLine("\n-Personale(P)");
+                Console.WriteLine("\n-Exit(E)");
+                Console.WriteLine("\nHvilken funktion vil du bruge");
+                string valg = Console.ReadLine();
+                valg = valg.ToLower();
+                Console.Clear();
+                if (valg == "ny person" || valg == "n")
+                {
+
+                    Console.Clear();
+                    Console.WriteLine("\nIndtast navn");
+                    string Navn = Console.ReadLine();
+                    Console.WriteLine("Indtast efternavn");
+                    string Efternavn = Console.ReadLine();
+
+                    string Email = $"{Navn + Efternavn}@Firma.dk";
+                    string path2 = $@"{pathAll}\\{Navn + Efternavn}.csv";
+
+                    if (File.Exists(path2))
+                    {
+                        Console.Clear();
+                        Console.WriteLine("*********denne person eksistere allerede*********");
+
+                    }
+                    else
+                    {
+                        StreamWriter Path = new StreamWriter($@"{pathAll}\\{Navn + Efternavn}.csv");
+                        Path.WriteLine($"{Navn},{Efternavn},{Email}");
+                        Path.Close();
+                        Console.Clear();
+                        Console.WriteLine("******************Person oprettet******************");
+                    }
+
+
+                }
+                else if (valg == "ændre person" || valg == "æ")
+                {
+                    Console.Clear();
+                    Console.WriteLine("\nHvilken persons fil vil du ændre i");
+                    DirectoryInfo d = new DirectoryInfo($@"{pathAll}");
+
+                    FileInfo[] Files = d.GetFiles("*.csv");
+                    string str = "";
+
+                    foreach (FileInfo file in Files)
+                    {
+                        str = str + "\n" + file.Name;
+
+                    }
+
+                    Console.WriteLine(str);
+
+                    Console.WriteLine("\nSkriv navn");
+                    string Navn = Console.ReadLine();
+                    string pathinfo = $@"{pathAll}\\{Navn}.csv";
+                    if (File.Exists(pathinfo))
+                    {
+                        StreamReader Info = new StreamReader(pathinfo);
+
+                        string line1;
+                        Console.Clear();
+                        while ((line1 = Info.ReadLine()) != null)
+                        {
+                            Console.WriteLine("\nHer den nuværende info om personen \n{0}\n", line1);
+                        }
+                        Info.Close();
+                        Console.WriteLine("Vil du forsætte ændre personen\n-Ændre\n-Exit\n");
+                        string svar = Console.ReadLine();
+                        svar = svar.ToLower();
+                        if (svar == "ændre")
+                        {
+                            File.Delete($"{pathAll}\\{Navn}.csv");
+                            Console.WriteLine("\nIndtast navn");
+                            string Navn1 = Console.ReadLine();
+                            Console.WriteLine("Indtast efternavn");
+                            string Efternavn1 = Console.ReadLine();
+                            Console.WriteLine("Indtast email");
+                            string Email = $"{Navn1}{Efternavn1}@Firma.dk";
+                            string path2 = $@"{pathAll}\\{Navn1 + Efternavn1}.csv";
+
+                            if (File.Exists(path2))
+                            {
+                                Console.Clear();
+                                Console.WriteLine("*********denne person eksistere allerede*********");
+
+                            }
+                            else
+                            {
+                                StreamWriter Path = new StreamWriter($"{pathAll}\\{Navn1 + Efternavn1}.csv");
+                                Path.WriteLine($"{Navn1},{Efternavn1},{Email}");
+                                Path.Close();
+                                Console.Clear();
+                                Console.WriteLine("******************Person Ændret******************");
+                            }
+
+                        }
+                        else if (svar == "exit")
+                        {
+                            Console.Clear();
+                        }
+                    }
+                    else { Console.Clear(); Console.WriteLine("Denne person findes ikke"); }
+                }
+                else if (valg == "slet"|| valg =="s")
+                {
+                    DirectoryInfo d = new DirectoryInfo($@"{pathAll}");
+
+                    FileInfo[] Files = d.GetFiles("*.csv");
+                    string str = "";
+
+                    foreach (FileInfo file in Files)
+                    {
+                        str = str + "\n" + file.Name;
+
+                    }
+                    Console.WriteLine("Her under er de aktuelle personer");
+                    Console.WriteLine(str);
+                    Console.WriteLine("\nHvilken funktion vil du bruge \nslette\nexit");
+                    
+                    while (true)
+                    {
+                        string valg2 = Console.ReadLine();
+                        valg2 = valg2.ToLower();
+                        if (valg2 == "slet" || valg2 == "slette")
+                        {
+                            Console.WriteLine("Skrive navnet på den du vil slette");
+                            string delete = Console.ReadLine();
+                            string pathdelete = $@"{pathAll}\\{delete}.csv";
+                            if (File.Exists(pathdelete))
+                            {
+                                File.Delete(pathdelete);
+                                Console.Clear();
+                                Console.WriteLine("******************Person Slettet******************");
+                                break;
+                            }
+                            else
+                            {
+
+                                Console.Clear();
+                                Console.WriteLine("******************Person findes ikke******************");
+                                break;
+                            }
+                            
+                        }
+                        else if (valg2 == "exit")
+                        {
+                            Console.Clear();
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("prøv igen");
+                        }
+                        
+                    }
+                }
+                else if(valg == "personale"||valg=="p")
+                {
+                    
+                    DirectoryInfo d = new DirectoryInfo($@"{pathAll}");
+
+                    FileInfo[] Files = d.GetFiles("*.csv");
+                    string str = "";
+
+                    foreach (FileInfo file in Files)
+                    {
+                        str = str + "\n" + file.Name;
+                        string pathpersonale = $@"{pathAll}\\{file.Name}";
+                        StreamReader Info = new StreamReader(pathpersonale);
+
+                        string line1;
+                        
+                        while ((line1 = Info.ReadLine()) != null)
+                        {
+                            Console.WriteLine("Filenavn:{1}\nInfo:{0}\n", line1,file.Name);
+                        }
+                        Info.Close();
+                    }
+                    Console.WriteLine("Tryk enter for at afslutte");
+                    Console.ReadLine();
+                    Console.Clear();
+                }
+                else if (valg == "exit" || valg == "e")
+                {
+                    break;
+                }
+                else if (valg =="slet alt"||valg=="sa")
+                {
+                    Directory.Delete(pathAll,true);
+                    Console.WriteLine("BIB"); Thread.Sleep(500); Console.WriteLine("BUB"); Thread.Sleep(500); Console.WriteLine("BIB"); Thread.Sleep(500); Console.WriteLine("BUB"); Thread.Sleep(500); Console.WriteLine("Computer processing");Thread.Sleep(3000);Console.Write("SKYNET LOADING"); Thread.Sleep(500);Console.Write("."); Thread.Sleep(500); Console.Write("."); Thread.Sleep(500); Console.Write("."); Thread.Sleep(500); Console.Write("."); ; Thread.Sleep(500); Console.Write("."); Thread.Sleep(2000);Console.WriteLine("\nSKYNET ONLINE"); Thread.Sleep(2000);
+                    Console.WriteLine("LAUNCHING NUKES"); Thread.Sleep(1000); Console.WriteLine("10"); Thread.Sleep(1000); ; Console.WriteLine("9"); Thread.Sleep(1000); ; Console.WriteLine("8"); Thread.Sleep(1000); ; Console.WriteLine("7"); Thread.Sleep(1000); ; Console.WriteLine("6"); Thread.Sleep(1000); ; Console.WriteLine("5"); Thread.Sleep(1000); ; Console.WriteLine("4"); Thread.Sleep(1000); ; Console.WriteLine("3"); Thread.Sleep(1000); ; Console.WriteLine("2"); Thread.Sleep(1000); ; Console.WriteLine("1"); Thread.Sleep(1000); ; Console.WriteLine("0"); Thread.Sleep(1000);
+                    break;
+                }
+            }
+        }
+    }
+}
